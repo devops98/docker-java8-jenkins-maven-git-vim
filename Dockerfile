@@ -1,9 +1,9 @@
 # Ubuntu 16.04 LTS
-# Oracle Java 1.8.0_11 64 bit
+# Oracle Java 1.8.0_112-b15 64 bit
 # Maven 3.3.9
 # Jenkins 2.19.4
-# git 1.9.1
-# Nano 2.2.6-1ubuntu1
+# git 2.7.4
+# Vim
 
 # extend the most recent long term support Ubuntu version
 FROM ubuntu:16.04
@@ -42,7 +42,7 @@ RUN apt-get install -y vim
 RUN apt-get clean
 
 # set shell variables for java installation
-ENV java_version 1.8.0_112-b15
+ENV java_version 1.8.0_112
 ENV filename jdk-8u112-linux-x64.tar.gz
 ENV downloadlink http://download.oracle.com/otn-pub/java/jdk/8u112-b15/$filename
 
