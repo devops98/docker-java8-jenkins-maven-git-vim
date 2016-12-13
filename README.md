@@ -3,12 +3,12 @@ docker-java8-jenkins-maven-git-nano
 
 This repository provides the Dockerfile that builds a continuous integration container from Ubuntu 16.04 LTS.
 
-# Ubuntu 16.04 LTS
-# Oracle Java 1.8.0_112-b15 64 bit
-# Maven 3.3.9
-# Jenkins 2.19.4
-# git 2.7.4
-# Vim 
+1.Ubuntu 16.04 LTS
+2.Oracle Java 1.8.0_112-b15 64 bit
+3.Maven 3.3.9
+4.Jenkins 2.19.4
+5.git 2.7.4
+6.Vim 
 
 Sets up a container with jenkins installed listening on port 8080.
 
