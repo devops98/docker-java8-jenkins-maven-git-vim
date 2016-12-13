@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  jenkins:
+    container_name: myjenkins
+    restart: alwayes
+    image: lw96/java8-jenkins-maven-git-vim:latest
+    ports:
+    - "8080:8080"
+    volumes:
+    - /opt/maven:/opt/apache-maven-3.3.9
+    - /opt/java8:/opt/java-oracle/jdk/1.8.0_112
+    - /opt/jenkins:/jenkins
+
