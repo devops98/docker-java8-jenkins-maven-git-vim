@@ -50,9 +50,9 @@ ENV PATH $JAVA_HOME/bin:$PATH
 RUN wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie"  -O /tmp/$filename $downloadlink \
     # unpack java
     && mkdir /opt/java-oracle \
-    && tar -zxf /tmp/$filename -C /opt/java-oracle/ \
+    && tar -zxf /tmp/$filename -C /opt/java-oracle/ 
     # configure symbolic links for the java and javac executables
-    && update-alternatives --install /usr/bin/java java $JAVA_HOME/bin/java 20000 \
+RUN update-alternatives --install /usr/bin/java java $JAVA_HOME/bin/java 20000 \
     && update-alternatives --install /usr/bin/javac javac $JAVA_HOME/bin/javac 20000  
 
 # copy jenkins war file to the container
