@@ -47,9 +47,9 @@ ENV JAVA_HOME /opt/java/jdk$java_version
 ENV PATH $JAVA_HOME/bin:$PATH
 
 # download java, accepting the license agreement
-RUN wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie"  -O /tmp/$filename $downloadlink
+RUN wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie"  -O /tmp/$filename $downloadlink \
     # unpack java
-    mkdir /opt/java \
+    && mkdir /opt/java \
     && tar -zxf /tmp/$filename -C /opt/java/ 
     # configure symbolic links for the java and javac executables
     update-alternatives --install /usr/bin/java java $JAVA_HOME/bin/java 20000 \
