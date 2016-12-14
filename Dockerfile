@@ -21,16 +21,15 @@ RUN apt-get install -y wget
 
 # ENV MAVEN_HOME /opt/maven
 ENV MAVEN_NAME apache-maven-3.3.9
-ENV MAVEN_HOME /opt/maven/$MAVEN_NAME
+ENV MAVEN_HOME /opt/maven/
 
 # get maven 3.3.9
 RUN wget --no-verbose -O /tmp/$MAVEN_NAME.tar.gz http://archive.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz \
     # install maven
-    && tar -zxf /tmp/$MAVEN_NAME.tar.gz -C /opt/maven \
-    && cp /opt/maven/$MAVEN_NAME/bin/* /usr/local/bin/ \
+    && tar -zxf /tmp/$MAVEN_NAME.tar.gz -C /opt/maven --strip-components=1 \
+    && cp /opt/maven/bin/* /usr/local/bin/ \
     && rm -f /tmp/$MAVEN_NAME.tar.gz
 
-tar -C /opt/apache-maven --extract --file /tmp/$MAVEN_NAME.tar.gz --strip-components=1
 # install git
 RUN apt-get install -y git
 
