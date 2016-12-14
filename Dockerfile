@@ -52,7 +52,7 @@ RUN wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=acc
     && mkdir /opt/java-oracle && tar -zxf /tmp/$filename -C /opt/java-oracle/ \
     # configure symbolic links for the java and javac executables
     && update-alternatives --install /usr/bin/java java $JAVA_HOME/bin/java 20000 \
-    && update-alternatives --install /usr/bin/javac javac $JAVA_HOME/bin/javac 20000  \
+    && update-alternatives --install /usr/bin/javac javac $JAVA_HOME/bin/javac 20000  
 
 # copy jenkins war file to the container
 ADD http://mirrors.jenkins.io/war-stable/2.19.4/jenkins.war /opt/jenkins.war
@@ -63,7 +63,7 @@ ENV JENKINS_HOME /jenkins
 ENTRYPOINT ["java", "-jar", "/opt/jenkins.war"]
 EXPOSE 8080
 
-VOLUME ['$JAVA_HOME','$MAVEN_HOME','$JENKINS_HOME']
+VOLUME $JAVA_HOME $MAVEN_HOME $JENKINS_HOME
 
 CMD [""]
 
