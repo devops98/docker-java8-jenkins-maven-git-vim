@@ -19,15 +19,16 @@ RUN apt-get update
 # install wget
 RUN apt-get install -y wget
 
-# get maven 3.3.9
-RUN wget --no-verbose -O /tmp/apache-maven-3.3.9.tar.gz http://archive.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
-
-# install maven
-RUN tar xzf /tmp/apache-maven-3.3.9.tar.gz -C /opt/
-RUN cp /opt/apache-maven-3.3.9/bin/* /usr/local/bin/
-RUN rm -f /tmp/apache-maven-3.3.9.tar.gz
 # ENV MAVEN_HOME /opt/maven
 ENV MAVEN_HOME /opt/apache-maven-3.3.9
+
+# get maven 3.3.9
+RUN wget --no-verbose -O /tmp/apache-maven-3.3.9.tar.gz http://archive.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz \
+    # install maven
+    && tar xzf /tmp/apache-maven-3.3.9.tar.gz -C /opt/ \
+    && cp /opt/apache-maven-3.3.9/bin/* /usr/local/bin/ \
+    && rm -f /tmp/apache-maven-3.3.9.tar.gz
+
 
 # install git
 RUN apt-get install -y git
@@ -42,17 +43,16 @@ RUN apt-get clean
 ENV java_version 1.8.0_112
 ENV filename jdk-8u112-linux-x64.tar.gz
 ENV downloadlink http://download.oracle.com/otn-pub/java/jdk/8u112-b15/$filename
-
-# download java, accepting the license agreement
-RUN  wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie"  -O /tmp/$filename $downloadlink 
-
-# unpack java
-RUN mkdir /opt/java-oracle && tar -zxf /tmp/$filename -C /opt/java-oracle/
-ENV JAVA_HOME /opt/java-oracle/jdk$java_version
+ENV JAVA_HOME /opt/java/jdk$java_version
 ENV PATH $JAVA_HOME/bin:$PATH
 
-# configure symbolic links for the java and javac executables
-RUN update-alternatives --install /usr/bin/java java $JAVA_HOME/bin/java 20000 && update-alternatives --install /usr/bin/javac javac $JAVA_HOME/bin/javac 20000
+# download java, accepting the license agreement
+RUN wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie"  -O /tmp/$filename $downloadlink \
+    # unpack java
+    && mkdir /opt/java-oracle && tar -zxf /tmp/$filename -C /opt/java-oracle/ \
+    # configure symbolic links for the java and javac executables
+    && update-alternatives --install /usr/bin/java java $JAVA_HOME/bin/java 20000 \
+    && update-alternatives --install /usr/bin/javac javac $JAVA_HOME/bin/javac 20000  \
 
 # copy jenkins war file to the container
 ADD http://mirrors.jenkins.io/war-stable/2.19.4/jenkins.war /opt/jenkins.war
