@@ -28,7 +28,7 @@ RUN wget --no-verbose -O /tmp/$MAVEN_NAME.tar.gz http://archive.apache.org/dist/
     # install maven
     && mkdir /opt/maven \
     && tar -zxf /tmp/$MAVEN_NAME.tar.gz -C /opt/maven --strip-components=1 \
-    && cp /opt/maven/bin/* /usr/local/bin/ \
+    && ln -s /opt/maven/bin/mvn /usr/local/bin \
     && rm -f /tmp/$MAVEN_NAME.tar.gz
 
 # install git
