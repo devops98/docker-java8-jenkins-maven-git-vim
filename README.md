@@ -6,7 +6,7 @@ This repository provides the Dockerfile that builds a continuous integration con
 * Ubuntu 16.04 LTS
 * Oracle Java 1.8.0_112-b15 64 bit
 * Maven 3.3.9
-* Jenkins 2.19.4
+* Jenkins 2.32.1
 * git 2.7.4
 * Vim 
 

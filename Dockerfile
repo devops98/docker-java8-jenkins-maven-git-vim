@@ -1,7 +1,7 @@
 # Ubuntu 16.04 LTS
 # Oracle Java 1.8.0_112-b15 64 bit
 # Maven 3.3.9
-# Jenkins 2.19.4
+# Jenkins 2.32.1
 # git 2.7.4
 # Vim
 
@@ -57,7 +57,7 @@ RUN wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=acc
     && update-alternatives --install /usr/bin/javac javac $JAVA_HOME/bin/javac 20000  
 
 # copy jenkins war file to the container
-ADD http://mirrors.jenkins.io/war-stable/2.19.4/jenkins.war /opt/jenkins.war
+ADD http://mirrors.jenkins.io/war-stable/2.23.1/jenkins.war /opt/jenkins.war
 RUN chmod 644 /opt/jenkins.war
 ENV JENKINS_HOME /jenkins
 
