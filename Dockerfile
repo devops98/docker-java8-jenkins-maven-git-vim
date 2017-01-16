@@ -57,7 +57,7 @@ RUN wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=acc
     && update-alternatives --install /usr/bin/javac javac $JAVA_HOME/bin/javac 20000  
 
 # copy jenkins war file to the container
-ADD http://mirrors.jenkins.io/war-stable/2.23.1/jenkins.war /opt/jenkins.war
+ADD http://mirrors.jenkins.io/war-stable/2.32.1/jenkins.war /opt/jenkins.war
 RUN chmod 644 /opt/jenkins.war
 ENV JENKINS_HOME /jenkins
 
