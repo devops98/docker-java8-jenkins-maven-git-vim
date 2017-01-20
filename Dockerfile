@@ -16,8 +16,8 @@ ENV DEBIAN_FRONTEND noninteractive
 # update dpkg repositories
 RUN apt-get update 
 
-# install wget
-RUN apt-get install -y wget curl
+# install wget 
+RUN apt-get install -y wget 
 
 # ENV MAVEN_HOME /opt/maven
 ENV MAVEN_NAME apache-maven-3.3.9
@@ -34,9 +34,25 @@ RUN wget --no-verbose -O /tmp/$MAVEN_NAME.tar.gz http://archive.apache.org/dist/
 # install git
 RUN apt-get install -y git
 
-# docker
-RUN curl -L https://get.docker.com/builds/Linux/x86_64/docker-latest > /usr/bin/docker && chmod +x /usr/bin/docker 
+RUN apt-get -y --no-cache \
+        ca-certificates \
+		curl \
+		openssl
 
+# ENV Docker
+ENV DOCKER_BUCKET get.docker.com
+ENV DOCKER_VERSION 1.13.0
+ENV DOCKER_SHA256 fc194bb95640b1396283e5b23b5ff9d1b69a5e418b5b3d774f303a7642162ad6
+
+# docker
+RUN curl -fSL "https://${DOCKER_BUCKET}/builds/Linux/x86_64/docker-${DOCKER_VERSION}.tgz" -o docker.tgz \
+	&& echo "${DOCKER_SHA256} *docker.tgz" | sha256sum -c - \
+	&& tar -xzvf docker.tgz \
+	&& mv docker/* /usr/local/bin/ \
+	&& rmdir docker \
+	&& rm docker.tgz \
+	&& docker -v
+    
 # docker-compose 
 RUN curl -L "https://github.com/docker/compose/releases/download/1.9.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \ 
     && chmod +x /usr/local/bin/docker-compose
