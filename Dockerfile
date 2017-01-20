@@ -34,7 +34,7 @@ RUN wget --no-verbose -O /tmp/$MAVEN_NAME.tar.gz http://archive.apache.org/dist/
 # install git
 RUN apt-get install -y git
 
-RUN apt-get -y --no-cache \
+RUN apt-get install -y  \
         ca-certificates \
 		curl \
 		openssl
@@ -52,7 +52,7 @@ RUN curl -fSL "https://${DOCKER_BUCKET}/builds/Linux/x86_64/docker-${DOCKER_VERS
 	&& rmdir docker \
 	&& rm docker.tgz \
 	&& docker -v
-    
+
 # docker-compose 
 RUN curl -L "https://github.com/docker/compose/releases/download/1.9.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \ 
     && chmod +x /usr/local/bin/docker-compose
