@@ -34,6 +34,13 @@ RUN wget --no-verbose -O /tmp/$MAVEN_NAME.tar.gz http://archive.apache.org/dist/
 # install git
 RUN apt-get install -y git
 
+# docker
+RUN curl -sSL https://get.docker.com/ | sh 
+
+# docker-compose 
+RUN curl -L "https://github.com/docker/compose/releases/download/1.9.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \ 
+    && chmod +x /usr/local/bin/docker-compose
+
 # install nano
 RUN apt-get install -y vim
 
@@ -60,6 +67,8 @@ RUN wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=acc
 ADD http://mirrors.jenkins.io/war-stable/2.32.1/jenkins.war /opt/jenkins.war
 RUN chmod 644 /opt/jenkins.war
 ENV JENKINS_HOME /jenkins
+
+
 
 # configure the container to run jenkins, mapping container port 8080 to that host port
 ENTRYPOINT ["java", "-jar", "/opt/jenkins.war"]

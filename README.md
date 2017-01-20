@@ -9,6 +9,7 @@ This repository provides the Dockerfile that builds a continuous integration con
 * Jenkins 2.32.1
 * git 2.7.4
 * Vim 
+* Docker && Docker-compose
 
 Sets up a container with jenkins installed listening on port 8080.
 
