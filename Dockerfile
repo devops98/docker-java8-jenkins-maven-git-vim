@@ -68,7 +68,7 @@ RUN apt-get clean
 # set shell variables for java installation
 ENV java_version 1.8.0_144
 ENV filename jdk-8u144-linux-x64.tar.gz
-ENV downloadlink http://download.oracle.com/otn-pub/java/jdk/8u144-b01/$filename
+ENV downloadlink http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/$filename
 
 # download java, accepting the license agreement
 RUN wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" -O /tmp/$filename $downloadlink 
