@@ -63,10 +63,10 @@ RUN apt-get install -y vim
 # remove download archive files
 RUN apt-get clean
 
-# set shell variables for java installation
-ENV java_version 1.8.0_112
-ENV filename jdk-8u112-linux-x64.tar.gz
-ENV downloadlink http://download.oracle.com/otn-pub/java/jdk/8u112-b15/$filename
+# set shell variables for java installation 
+ENV java_version 1.8.0_144
+ENV filename jdk-8u144-linux-x64.tar.gz
+ENV downloadlink http://download.oracle.com/otn-pub/java/jdk/8u144-b01/$filename
 ENV JAVA_HOME /opt/java/jdk$java_version
 ENV PATH $JAVA_HOME/bin:$PATH
 
