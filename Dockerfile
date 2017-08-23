@@ -1,7 +1,9 @@
 # Ubuntu 16.04 LTS
-# Oracle Java 1.8.0_112-b15 64 bit
+# Oracle Java 1.8.0_144 64 bit
 # Maven 3.3.9
-# Jenkins 2.32.3
+# Jenkins 2.60.3
+# docker 1.13.1
+# docker-compose 1.16.0-rc1
 # git latest
 # Vim
 
@@ -41,8 +43,8 @@ RUN apt-get install -y  \
 
 # ENV Docker
 ENV DOCKER_BUCKET get.docker.com
-ENV DOCKER_VERSION 1.13.0
-ENV DOCKER_SHA256 fc194bb95640b1396283e5b23b5ff9d1b69a5e418b5b3d774f303a7642162ad6
+ENV DOCKER_VERSION 1.13.1
+ENV DOCKER_SHA256 97892375e756fd29a304bd8cd9ffb256c2e7c8fd759e12a55a6336e15100ad75
 
 # docker
 RUN curl -fSL "https://${DOCKER_BUCKET}/builds/Linux/x86_64/docker-${DOCKER_VERSION}.tgz" -o docker.tgz \
@@ -54,7 +56,7 @@ RUN curl -fSL "https://${DOCKER_BUCKET}/builds/Linux/x86_64/docker-${DOCKER_VERS
 	&& docker -v
 
 # docker-compose 
-RUN curl -L "https://github.com/docker/compose/releases/download/1.9.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \ 
+RUN curl -L https://github.com/docker/compose/releases/download/1.16.0-rc1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose \ 
     && chmod +x /usr/local/bin/docker-compose
 
 # install nano
@@ -80,7 +82,7 @@ RUN wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=acc
     && update-alternatives --install /usr/bin/javac javac $JAVA_HOME/bin/javac 20000  
 
 # copy jenkins war file to the container
-ADD http://mirrors.jenkins.io/war-stable/2.60.2/jenkins.war /opt/jenkins.war
+ADD http://mirrors.jenkins.io/war-stable/2.60.3/jenkins.war /opt/jenkins.war
 RUN chmod 644 /opt/jenkins.war
 ENV JENKINS_HOME /jenkins
 
