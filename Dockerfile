@@ -1,8 +1,10 @@
 # Ubuntu 16.04 LTS
-# Oracle Java 1.8.0_112-b15 64 bit
+# Oracle Java 1.8.0_144 64 bit
 # Maven 3.3.9
 # Jenkins 2.73.2
 # git 2.7.4
+# docker 1.13.1
+# docker-compose 1.16.1
 # Vim
 
 # extend the most recent long term support Ubuntu version
@@ -41,8 +43,8 @@ RUN apt-get install -y  \
 
 # ENV Docker
 ENV DOCKER_BUCKET get.docker.com
-ENV DOCKER_VERSION 1.13.0
-ENV DOCKER_SHA256 fc194bb95640b1396283e5b23b5ff9d1b69a5e418b5b3d774f303a7642162ad6
+ENV DOCKER_VERSION 1.13.1
+ENV DOCKER_SHA256 97892375e756fd29a304bd8cd9ffb256c2e7c8fd759e12a55a6336e15100ad75
 
 # docker
 RUN curl -fSL "https://${DOCKER_BUCKET}/builds/Linux/x86_64/docker-${DOCKER_VERSION}.tgz" -o docker.tgz \
@@ -64,23 +66,24 @@ RUN apt-get install -y vim
 RUN apt-get clean
 
 # set shell variables for java installation
-ENV java_version 1.8.0_112
-ENV filename jdk-8u112-linux-x64.tar.gz
-ENV downloadlink http://download.oracle.com/otn-pub/java/jdk/8u112-b15/$filename
-ENV JAVA_HOME /opt/java/jdk$java_version
-ENV PATH $JAVA_HOME/bin:$PATH
+ENV java_version 1.8.0_144
+ENV filename jdk-8u144-linux-x64.tar.gz
+ENV downloadlink http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/$filename
 
 # download java, accepting the license agreement
-RUN wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie"  -O /tmp/$filename $downloadlink \
-    # unpack java
-    && mkdir /opt/java \
-    && tar -zxf /tmp/$filename -C /opt/java/  \ 
-    # configure symbolic links for the java and javac executables
-    && update-alternatives --install /usr/bin/java java $JAVA_HOME/bin/java 20000 \
-    && update-alternatives --install /usr/bin/javac javac $JAVA_HOME/bin/javac 20000  
+RUN wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" -O /tmp/$filename $downloadlink 
+
+# unpack java
+RUN mkdir /opt/java-oracle && tar -zxf /tmp/$filename -C /opt/java-oracle/
+ENV JAVA_HOME /opt/java-oracle/jdk$java_version
+ENV PATH $JAVA_HOME/bin:$PATH
+
+# configure symbolic links for the java and javac executables
+RUN update-alternatives --install /usr/bin/java java $JAVA_HOME/bin/java 20000 && update-alternatives --install /usr/bin/javac javac $JAVA_HOME/bin/javac 20000
 
 # copy jenkins war file to the container
 ADD http://mirrors.jenkins.io/war-stable/2.73.2/jenkins.war /opt/jenkins.war
+
 RUN chmod 644 /opt/jenkins.war
 ENV JENKINS_HOME /jenkins
 
