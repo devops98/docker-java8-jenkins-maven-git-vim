@@ -1,5 +1,5 @@
 # Ubuntu 16.04 LTS
-# Oracle Java 1.8.0_144 64 bit
+# Oracle Java 1.8.0_151 64 bit
 # Maven 3.3.9
 # Jenkins 2.73.2
 # git 2.7.4
@@ -66,9 +66,9 @@ RUN apt-get install -y vim
 RUN apt-get clean
 
 # set shell variables for java installation
-ENV java_version 1.8.0_144
-ENV filename jdk-8u144-linux-x64.tar.gz
-ENV downloadlink http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/$filename
+ENV java_version 1.8.0_151
+ENV filename jdk-8u151-linux-x64.tar.gz
+ENV downloadlink http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/$filename
 
 # download java, accepting the license agreement
 RUN wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" -O /tmp/$filename $downloadlink 
