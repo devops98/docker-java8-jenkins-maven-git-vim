@@ -53,7 +53,7 @@ RUN add-apt-repository \
    $(lsb_release -cs) \
    stable"
 
-RUN apt-get update && apt-get install docker-ce && docker -v
+RUN apt-get update && apt-get install docker-ce -y && docker -v
 
 # # ENV Docker
 # ENV DOCKER_BUCKET get.docker.com
