@@ -44,7 +44,7 @@ RUN apt-get install -y  \
 		openssl
 
 # Docker
-RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - 
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - 
 
 RUN apt-key fingerprint 0EBFCD88
 
